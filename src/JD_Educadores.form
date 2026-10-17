@@ -56,7 +56,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel6" min="-2" pref="94" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                  <Component id="TXTelefono" max="32767" attributes="0"/>
+                                  <Component id="TTelefono" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -102,7 +102,7 @@
               </Group>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TXTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="TTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -155,7 +155,7 @@
         <Property name="text" type="java.lang.String" value="Tel&#xe9;fono"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="TXTelefono">
+    <Component class="javax.swing.JTextField" name="TTelefono">
     </Component>
     <Component class="javax.swing.JTextField" name="TDireccion">
     </Component>

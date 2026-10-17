@@ -5,7 +5,7 @@ import java.sql.*;
 public class Infante {
     
     static String todos = "SELECT * FROM infantes ORDER BY nombreI";
-    static String curps = "SELECT curpI FROM infantes ORDER BY curpI";
+    static String curps = "SELECT curp FROM infantes ORDER BY curp";
     //Declara varibales como string
     String curp,nombre,sexo,fecha,estado;
     

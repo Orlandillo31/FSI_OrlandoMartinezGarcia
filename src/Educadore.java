@@ -3,7 +3,7 @@ import java.sql.*;
 public class Educadore {
     
     static String todos = "SELECT * FROM educadores ORDER BY nombreE";
-    static String curps = "SELECT curpE FROM educadores ORDER BY curpI";
+    static String curps = "SELECT curpE FROM educadores ORDER BY curpE";
     //Declarar variables
     String curp,nombre,sexo,telefono,direccion,estado;
 

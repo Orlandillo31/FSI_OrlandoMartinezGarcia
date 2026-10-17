@@ -1,4 +1,8 @@
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -12,6 +16,17 @@ public class JD_Responsables extends javax.swing.JDialog {
     }
     public void obtenerConexion(Conexion cnx){
         this.cnx = cnx;
+    }
+    public void obtenerResponsable(Responsable res){
+       
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        TCurp.setText(res.curp);
+        TNombre.setText(res.nombre);
+        CBSexo.setSelectedItem(res.sexo);
+        TTelefono.setText(res.telefono);
+        TParentesco.setText(res.parentesco);
+        CBSexo.setSelectedItem(res.sexo);
+        CBEstado.setSelectedItem(res.estado);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,10 +42,10 @@ public class JD_Responsables extends javax.swing.JDialog {
         TNombre = new javax.swing.JTextField();
         CBEstado = new javax.swing.JComboBox<>();
         CBSexo = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        Actualizar = new javax.swing.JButton();
         BRegistrar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        BCancelar = new javax.swing.JButton();
+        BBorrar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         TTelefono = new javax.swing.JTextField();
         TParentesco = new javax.swing.JTextField();
@@ -57,7 +72,12 @@ public class JD_Responsables extends javax.swing.JDialog {
 
         CBSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", " " }));
 
-        jButton1.setText("ACTUALIZAR");
+        Actualizar.setText("ACTUALIZAR");
+        Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarActionPerformed(evt);
+            }
+        });
 
         BRegistrar.setText("REGISTRAR");
         BRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,9 +86,9 @@ public class JD_Responsables extends javax.swing.JDialog {
             }
         });
 
-        jButton3.setText("CANCELAR");
+        BCancelar.setText("CANCELAR");
 
-        jButton4.setText("BORRAR");
+        BBorrar.setText("BORRAR");
 
         jLabel6.setText("Teléfono");
 
@@ -108,11 +128,11 @@ public class JD_Responsables extends javax.swing.JDialog {
                         .addGap(6, 6, 6)
                         .addComponent(BRegistrar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addComponent(Actualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
+                        .addComponent(BBorrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(BCancelar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,10 +167,10 @@ public class JD_Responsables extends javax.swing.JDialog {
                     .addComponent(CBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(BCancelar)
                     .addComponent(BRegistrar)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4))
+                    .addComponent(Actualizar)
+                    .addComponent(BBorrar))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -178,6 +198,24 @@ public class JD_Responsables extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Error de Registro");
         }
     }//GEN-LAST:event_BRegistrarActionPerformed
+
+    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
+           Responsable res = new Responsable(
+               TCurp.getText(),
+               TNombre.getText(),
+               CBSexo.getSelectedItem().toString(),
+               TTelefono.getText(),
+               TParentesco.getText(),
+               CBEstado.getSelectedItem().toString()
+        );
+        
+        if (res.insertar(cnx.con) == 1) {
+            JOptionPane.showMessageDialog(this, "Educador Registrado");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error de Registro");
+        }
+    }//GEN-LAST:event_ActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,6 +260,9 @@ public class JD_Responsables extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Actualizar;
+    private javax.swing.JButton BBorrar;
+    private javax.swing.JButton BCancelar;
     private javax.swing.JButton BRegistrar;
     private javax.swing.JComboBox<String> CBEstado;
     private javax.swing.JComboBox<String> CBSexo;
@@ -229,9 +270,6 @@ public class JD_Responsables extends javax.swing.JDialog {
     private javax.swing.JTextField TNombre;
     private javax.swing.JTextField TParentesco;
     private javax.swing.JTextField TTelefono;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
