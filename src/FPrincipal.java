@@ -17,9 +17,7 @@ public class FPrincipal extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this,"No se pudo conectar a la base de datos");
             System.exit(0);
-        }
-        
-        
+        }   
     }
     
 

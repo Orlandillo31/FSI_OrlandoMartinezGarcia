@@ -135,6 +135,11 @@ public class JD_Bitacora extends javax.swing.JDialog {
         BBorrar.setBackground(new java.awt.Color(51, 51, 255));
         BBorrar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         BBorrar.setText("BORRAR");
+        BBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BBorrarActionPerformed(evt);
+            }
+        });
 
         jLabel10.setBackground(new java.awt.Color(255, 51, 51));
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -300,7 +305,36 @@ public class JD_Bitacora extends javax.swing.JDialog {
 
     private void BActuazliarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActuazliarActionPerformed
 
-        if (JLFolio.getText().trim().isEmpty()) {
+        Bitacora bit = new Bitacora();
+
+        bit.folio = JLFolio.getText();
+        bit.tiempo = JLFecha.getText();
+
+        bit.tipo = CBTipo.getSelectedItem().toString().toLowerCase();
+        bit.observaciones = TAObservaciones.getText();
+
+        bit.infantesC = CBInfantes.getSelectedItem().toString();
+        bit.responsablesC = CBResponsables.getSelectedItem().toString();
+        bit.educadoresC = CBEducadores.getSelectedItem().toString();
+
+        if (bit.actualizar(cnx.con) == 1) {
+            JOptionPane.showMessageDialog(this,
+                    "Bitacora actualizada correctamente");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "No se pudo actualizar la bitacora");
+        }
+
+
+    }//GEN-LAST:event_BActuazliarActionPerformed
+
+    private void BCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_BCancelarActionPerformed
+
+    private void BBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BBorrarActionPerformed
+                if (JLFolio.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     "Selecciona un registro para borrar");
             return;
@@ -329,13 +363,7 @@ public class JD_Bitacora extends javax.swing.JDialog {
                         "No se pudo eliminar la bitacora");
             }
         }
-
-
-    }//GEN-LAST:event_BActuazliarActionPerformed
-
-    private void BCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_BCancelarActionPerformed
+    }//GEN-LAST:event_BBorrarActionPerformed
 
    
     public static void main(String args[]) {
