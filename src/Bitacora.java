@@ -59,26 +59,23 @@ public class Bitacora {
     
     public int borrar(Connection con){
         int resultado = 0;
-        
-        try {
-            String sql = "DELETE FROM bitacora WHERE curp = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            
-            ps.setString(1, folio);
-            ps.setString(2, tiempo);
-            ps.setString(3, tipo );
-            ps.setString(4, observaciones);
-            ps.setString(5, infantesC);
-            ps.setString(6, responsablesC);
-            ps.setString(7, educadoresC);
-            return ps.executeUpdate();
-            
+
+        String sql = "DELETE FROM bitacora WHERE folio = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, Integer.parseInt(folio));
+
+            resultado = ps.executeUpdate();
+
+            System.out.println("Filas eliminadas: " + resultado);
+
         } catch (Exception e) {
-            System.out.println("Error:"+ e.getMessage());
-            return resultado;
-            
+            System.out.println("Error:" + e.getMessage());
+            e.printStackTrace();
         }
-        
+        return resultado;
+
     }
     
 public int actualizar(Connection con) {

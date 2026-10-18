@@ -126,6 +126,11 @@ public class JD_Bitacora extends javax.swing.JDialog {
         BCancelar.setBackground(new java.awt.Color(255, 51, 51));
         BCancelar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         BCancelar.setText("CANCELAR");
+        BCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BCancelarActionPerformed(evt);
+            }
+        });
 
         BBorrar.setBackground(new java.awt.Color(51, 51, 255));
         BBorrar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -295,26 +300,42 @@ public class JD_Bitacora extends javax.swing.JDialog {
 
     private void BActuazliarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BActuazliarActionPerformed
 
-        Bitacora bit = new Bitacora();
-
-        bit.folio = JLFolio.getText();
-        bit.tiempo = JLFecha.getText();
-
-        bit.tipo = CBTipo.getSelectedItem().toString().toLowerCase();
-        bit.observaciones = TAObservaciones.getText();
-
-        bit.infantesC = CBInfantes.getSelectedItem().toString();
-        bit.responsablesC = CBResponsables.getSelectedItem().toString();
-        bit.educadoresC = CBEducadores.getSelectedItem().toString();
-
-        if (bit.actualizar(cnx.con) == 1) {
-            JOptionPane.showMessageDialog(this, "Bitacora actualizada correctamente");
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "No se pudo actualizar la bitacora");
+        if (JLFolio.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Selecciona un registro para borrar");
+            return;
         }
 
+        int confirmar = JOptionPane.showConfirmDialog(
+                this,
+                "¿Estas seguro de eliminar el folio "
+                + JLFolio.getText() + "?",
+                "Confirmar eliminacion",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+
+        if (confirmar == JOptionPane.YES_OPTION) {
+
+            Bitacora bit = new Bitacora();
+            bit.folio = JLFolio.getText();
+
+            if (bit.borrar(cnx.con) == 1) {
+                JOptionPane.showMessageDialog(this,
+                        "Bitacora eliminada correctamente");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "No se pudo eliminar la bitacora");
+            }
+        }
+
+
     }//GEN-LAST:event_BActuazliarActionPerformed
+
+    private void BCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_BCancelarActionPerformed
 
    
     public static void main(String args[]) {
